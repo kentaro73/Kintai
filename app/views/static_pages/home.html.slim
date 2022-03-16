@@ -1,0 +1,10 @@
+h1 勤怠状況
+
+.row
+  aside.col-md-3
+    .attendance_form
+      = render partial: 'shared/attendance_form'
+  
+  .col-md-9
+    h3 本日の勤怠状況
+    = render 'shared/feed'

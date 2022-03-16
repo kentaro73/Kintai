@@ -1,0 +1,30 @@
+.text-center
+  h1 出勤記録
+
+.text-right
+  = link_to '新規登録', new_stamp_path, class: 'btn btn-primary'
+
+.mb-3
+
+table.table.table-hover.arrive
+  thead.thead-default
+    tr
+      th 日付
+      th 出社時刻
+      th 退社時刻
+  tbody
+    tr
+      - @stamps.each do |stamp|
+        td
+          / = stamp.stamping.in_time_zone('Tokyo').strftime('%m月%d日')        
+        td
+          - if stamp.arrive_flg == true
+            = stamp.stamping.in_time_zone('Tokyo').strftime('%H:%M')
+        td 
+          - if stamp.arrive_flg == false
+            = stamp.stamping.in_time_zone('Tokyo').strftime('%H:%M')
+      / - @stamps.each do |stamp|
+      /   - if stamp.arrive_flg == false
+      /     = stamp.stamping.in_time_zone('Tokyo').strftime('%H:%M')
+
+

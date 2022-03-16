@@ -1,0 +1,23 @@
+/ - if stamp.errors.present?
+/   ul#error_explanation.text-danger
+/     - stamp.errors.full_messages.each do |msg|
+/       li = msg
+
+.text-center
+  = Time.now.strftime("%Y-%m-%d(%a) %H:%M")
+
+.stamp-submit
+  = form_with model: @stamp, local: true do |f|
+    .form-group
+      .mt-5
+      .status
+        .arrive
+          = f.radio_button :arrive_flg, :true, class: 'd-none', id: 'select-arive'
+          = f.label :arrive_flg, '出社', for: 'select-arive', tabindex: '-1'
+        .leave
+          = f.radio_button :arrive_flg, :false, class: 'd-none', id: 'select-leave'
+          = f.label :arrive_flg, '退社', for: 'select-leave', tabindex: '0'
+      = f.label :stamping, class: 'd-none'
+      = f.hidden_field :stamping, value: Time.now 
+    .text-center
+      = f.submit '打刻', class: 'btn btn-outline-primary submit-btn'

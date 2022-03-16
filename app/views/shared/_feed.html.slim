@@ -1,0 +1,17 @@
+- if @feed_items.any?
+  table.table
+    thead
+      tr
+        th scope="col"
+          名前
+        th scope="col"
+          出社時刻
+        th scope="col"
+          退社時刻
+        th scope="col"
+          作成日時
+        th
+        th
+    tbody
+      = render partial: 'shared/home_attendance', collection: @feed_items, as: 'attendance'
+      

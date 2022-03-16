@@ -1,0 +1,14 @@
+tr id="attendance-#{attendance.id}""
+  .attendance_time
+    td
+      = attendance.clock_in_at.to_s(datetime_jp) unless attendance.clock_in_at.nil?
+    td
+      = attendance.clock_out_at.to_s(:datetime_jp) unless attendance.clock_out_at.nil?
+  .timestamp
+    td
+      = tine_ago_in_words(attendance.created_at) ago.
+    td
+      - if current_user?(attendance.user)
+        / = link_to '編集', edit_attendance_path(attendance)
+    td
+      

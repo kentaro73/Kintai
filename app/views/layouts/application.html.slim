@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    title
+      | Kintai
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    / = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    .app-title.navbar.navbar-expand-md.navbar-light.bg-light
+      .navbar-brand Kintai
+
+      ul.navbar-nav.ml-auto
+        - if current_user
+          / li.nav-item= link_to '', root_path, class: 'nav-link'
+          li.nav-item= link_to "#{current_user.email}", user_path(current_user.id), class: 'nav-link'
+          li.nav-item= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link'
+        - else
+          li.nav-item= link_to '打刻', new_stamp_path, class: 'nav-link'
+          li.nav-item= link_to "Signup", new_user_registration_path, class: 'nav-link'
+          li.nav-item= link_to 'Login', new_user_session_path, class: 'nav-link'
+
+    .container
+      - if flash.notice.present?
+        .alert.alert-success.text-center= flash.notice
+      - if flash.alert.present?
+        .alert.alert-danger = flash.alert
+      = yield
