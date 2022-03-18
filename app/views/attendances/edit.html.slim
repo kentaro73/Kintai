@@ -1,0 +1,17 @@
+h1 編集
+
+= form_with model: @attendance, local: true do |f|
+  .form-inline.text-left
+    .form-group
+      = f.label :clock_in, '修正する日'
+      = f.date_field :clock_in_at, class: 'form-control'
+    .form-group
+      = f.label :clock_in, '　　修正する時間　', class: 'control-label'
+      = f.time_field :clock_in_at, class: 'form-control'
+    .form-group
+      = f.label :clock_out, '修正する日'
+      = f.date_field :clock_out_at, class: 'form-control'
+    .form-group
+      = f.label :clock_out, '　　修正する時間　', class: 'control-label'
+      = f.time_field :clock_out_at, class: 'form-control'
+  = f.submit '更新', class: 'btn btn-primary'

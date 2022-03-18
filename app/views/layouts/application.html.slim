@@ -10,7 +10,7 @@ html
     / = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
     .app-title.navbar.navbar-expand-md.navbar-light.bg-light
-      .navbar-brand Kintai
+      .navbar-brand = link_to 'Kintai', root_path, class: 'nav-link'
 
       ul.navbar-nav.ml-auto
         - if current_user

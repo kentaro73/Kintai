@@ -1,12 +1,12 @@
 tr id="attendance-#{attendance.id}"
   / td.user = link_to attendance.user.email, attendance.user
-  td.user ユーザー名
+  td.user = link_to "#{attendance.user.name}", user_path(attendance.user_id)
   td.attendance_time= attendance.clock_in_at.strftime("%m/%d %H:%M") unless attendance.clock_in_at.nil?
   td.attendance_time= attendance.clock_out_at.strftime("%m/%d %H:%M") unless attendance.clock_out_at.nil?
   td.timestamp= time_ago_in_words(attendance.created_at)
   td
     - if current_user == attendance.user
-      = link_to '編集', edit_attendance_path(attendance)
+      = link_to '編集', edit_attendance_path(attendance), class: 'btn btn-outline-primary'
   td
     - if current_user.admin?
       = link_to '削除', attendance, method: :delete, data: { confirm: '本当に削除しますか？' }

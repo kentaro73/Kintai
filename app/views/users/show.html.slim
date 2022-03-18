@@ -1,0 +1,19 @@
+.mb-3
+
+h3 
+  = "#{@user.name}さんの勤怠状況" 
+
+.mb-3
+
+table.table.table-hover
+  thread.thread-default
+    tr
+      th 出勤時刻
+      th 退勤時刻
+      th
+  tbody
+    - @user.attendances.each do |attendance|
+      tr
+        td.attendance_time= attendance.clock_in_at.strftime("%m/%d %H:%M") unless attendance.clock_in_at.nil?
+        td.attendance_time= attendance.clock_out_at.strftime("%m/%d %H:%M") unless attendance.clock_out_at.nil?
+        td = link_to '編集', edit_attendance_path, class: 'btn btn-outline-primary'

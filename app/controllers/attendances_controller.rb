@@ -1,7 +1,7 @@
 class AttendancesController < ApplicationController
   # before_action :authenticate_user!, only: [:create, :destroy, :update, :edit]
+  before_action :correct_user,   only: [:destroy, :update, :edit]
   
-
   def create
     @attendance = current_user.today_attendance
     is_clocked_in = clock_in?(@attendance)
@@ -23,4 +23,35 @@ class AttendancesController < ApplicationController
       render 'static_pages/home'
     end
   end
+
+  def edit
+    @attendance = Attendance.find(params[:id])
+  end
+
+  def update
+    @attendance = Attendance.find(params[:id])
+    if @attendance.update(attendance_params)
+      flash[:success] = "勤怠を更新しました。"
+      redirect_to @attendance.user
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @attendance.destroy
+    flash[:success] = "削除しました。"
+    redirect_to request.referrer || root_url
+  end
+
+  private
+
+    def attendance_params
+      params.require(:attendance).permit(:clock_in_at, :clock_out_at)
+    end
+
+    def correct_user
+      @attendance = current_user.attendances.find_by(id: params[:id])
+      redirect_to root_url if @attendance.nil?
+    end
 end

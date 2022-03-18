@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'users/index'
+  get 'users/show'
   root to: 'static_pages#home'
   devise_for :users
   devise_scope :user do
